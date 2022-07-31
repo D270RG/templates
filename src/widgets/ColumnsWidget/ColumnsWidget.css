@@ -1,0 +1,12 @@
+.hover-style{
+    background: linear-gradient(to left, white 50%, red 50%) right;
+    color: linear-gradient(to left, red 50%, white 50%) right;
+    border-right:1px solid;
+    border-color:white;
+    background-size: 200%;
+    transition: .15s ease-out;
+}
+.hover-style:hover{
+    color: white;
+    background-position: left;
+}
