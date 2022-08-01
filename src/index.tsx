@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 // import Grid from './pages/grid-layout';
-import Page from './pages/panorama-layout'
+import Page from './pages/carousel-layout'
 import NavPanel from './widgets/nav-panel/NavPanel';
 
 const root = ReactDOM.createRoot(
