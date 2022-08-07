@@ -11,7 +11,8 @@ import SocialWidget from '../widgets/SocialWidget/SocialWidget';
 import {ThreeDots} from 'react-bootstrap-icons';
 import Texts from './texts';
 
-import panorama from './pictures/panorama.jpg';
+import bg3 from './pictures/bg3.jpg'
+
 function Label(){
     return(
         <Row className='d-xs p-0 m-0 bg-transparent justify-content-center text-center align-items-center' style={{height:'calc(100vh*0.4)',overflow:'hidden'}}>
@@ -22,9 +23,10 @@ function Label(){
     );
 }
 
+
 function Grid(){
     return(
-        <Container fluid style={{backgroundImage: 'url("http://via.placeholder.com/256x256")'}}>
+        <Container className='parallax-container' fluid style={{backgroundImage: 'url(' + require('./pictures/bg4.jpg') + ')'}}>
                 <Label/>
                 <Row className='bg-light shadow'>
                     <Col lg='1' className='d-lg' /*style={{border:'2px solid'}}*/>{/*space*/}</Col>
@@ -37,7 +39,7 @@ function Grid(){
                     <Col lg='1' className='d-lg'/*style={{border:'2px solid'}}*/>{/*space*/}</Col>
                 </Row>
 
-                <Row className='d-xs' style={{height:'calc(100vh*0.04)'}}>{/*space*/}</Row>
+                
 
                 <ButtonsWidget texts={Texts.buttonsDescriptions}/>
 

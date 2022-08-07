@@ -1,5 +1,7 @@
 import {useState,useEffect,MouseEventHandler} from 'react';
 import { Col,Row,Ratio,Container,Button} from 'react-bootstrap';
+import {ChevronDoubleLeft,ChevronDoubleRight,CircleFill,Circle} from 'react-bootstrap-icons';
+import './CarouselWidget.css';
 function sumMaps(a:Map<string,number>,b:Map<string,number>){
   a.forEach((value,key)=>{
     a.set(key,value+(b.get(key) as number));
@@ -14,7 +16,7 @@ class TransitionMap{
     } else if(other!==undefined){
       this.val = other.get();
     } else {
-      this.val = new Map([['px',0],['%',0],['rem',0]]); //TODO: initial calc initial(contentArr.len,container.len(contentArr.len))
+      this.val = new Map([['px',-5],['%',0],['rem',0]]); //TODO: initial calc initial(contentArr.len,container.len(contentArr.len))
     }
   }
   formString(){
@@ -89,26 +91,26 @@ function Carousel(props){
     });
     return tileArr;
   }
-  
   return(
-    <Container className='m-0 p-0' fluid style={{overflow:'hidden'}}>
+    <Container className={'m-0 p-0 '+props.className} fluid style={{overflow:'hidden'}}>
       <Row className='carousel-row m-0 p-0' style={{height:'400px',width:'1000%',overflow:'hidden'}}>
           {formStyles()}
       </Row>
-      <Row>
-          <button className='btn h-15 w-15' onClick={()=>{
+      <Container className='d-flex text-center justify-content-center' style={{flexDirection:'row'}}>
+          <button className='btn btn-nohighlight btn-scale text-dark' onClick={()=>{
                                       if(center>0){
                                         setTransition(new TransitionMap(sumMaps(transition.get(),new Map([['px',0],['%',100],['rem',0]]))));
                                         setCenter(center-1);
                                       }
-                                      }}>Right</button>
-          <button className='btn h-15 w-15' onClick={()=>{
+                                      }}><ChevronDoubleLeft/></button>
+          <button className='btn disabled' style={{color:'red'}}><Circle/></button>
+          <button className='btn btn-nohighlight btn-scale text-dark' onClick={()=>{
                                     if(center<props.contentArr.length-1){
                                       setTransition(new TransitionMap(sumMaps(transition.get(),new Map([['px',0],['%',-100],['rem',-0]]))));
                                       setCenter(center+1);
                                     }
-                                      }}>Left</button>
-      </Row>
+                                      }}><ChevronDoubleRight/></button>
+      </Container>
     </Container>
   );
 }

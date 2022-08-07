@@ -1,0 +1,9 @@
+.btn-nohighlight:focus,.btn-nohighlight:active{
+    box-shadow: none !important;
+    outline: none !important;
+}
+.btn-scale:hover{
+    transform:scale(1.5);
+    -webkit-transition: -webkit-transform 1s;
+    transition: transform 1s;
+}

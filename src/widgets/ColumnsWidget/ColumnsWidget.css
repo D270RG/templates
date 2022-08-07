@@ -7,6 +7,6 @@
     transition: .15s ease-out;
 }
 .hover-style:hover{
-    color: white;
+    color: white !important;
     background-position: left;
 }
