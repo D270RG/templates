@@ -3,37 +3,42 @@ import React, { useState, useEffect, useRef} from 'react';
 import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
 import './VideoWidget.css';
 import { extract } from 'oembed-parser';
-//no initial active element -- possible faster with many entries
+
 
 function VideoWidgetControl(prevState,nextState){
     return (prevState.indicator) && (nextState.indicator);
 }
-// function PlayListElement(props){
-//     const [index] = useState(props.index);
-//     if(props.active){
-//         return(<ListGroup.Item className='list-style active' href={'#'+index} action >{props.label}</ListGroup.Item>); //Bootstrap active styles binded to hrefs on some reason
-//     } else {
-//         return(<ListGroup.Item className='list-style' href={'#'+index} action onClick={event=>{
-//             props.setLink(props.embedHost+props.link); 
-//             props.setActive(index);
-//         }}>{props.label}</ListGroup.Item>);
-//     }
-// }
+function PlayListElement(props){
+    const [index] = useState(props.index);
+    if(props.active){
+        return(<ListGroup.Item className='list-style active' href={'#'+index} action >{props.label}</ListGroup.Item>); //Bootstrap active styles binded to hrefs on some reason
+    } else {
+        return(<ListGroup.Item className='list-style' href={'#'+index} action onClick={event=>{
+            props.setLink(props.embedHost+props.link); 
+            props.setActive(index);
+        }}>{props.label}</ListGroup.Item>);
+    }
+}
 function Playlist(props:{contentList:Map<string,string>,setLink:any}){
     var embedLink = 'https://www.youtube.com/embed/';
     var videoLink = 'https://www.youtube.com/watch?v=';
-    //const [active,setActive] = useState(0);
+    const [active,setActive] = useState(0);
     const [contents,updateContents] = useState(props.contentList);
     var linksKeys = Array.from(contents.keys());
     useEffect(()=>{
         formTitles();
     },[]);
-    // useEffect(()=>{
-    //     props.setLink(embedLink+linksKeys.at(active));
-    // });
+    useEffect(()=>{
+        props.setLink(embedLink+linksKeys.at(active));
+    });
 
     function getTitle(id:any){
         var url = videoLink+id;
+        var timeout = new Promise(function(resolve, reject){
+            setTimeout(function() { 
+                reject('Timed out'); 
+            }, 2000);
+        });
         var p = new Promise<string>((resolve,reject)=>{
             extract(url).then((oembed) => {
                 resolve(oembed['title'] as string);
@@ -42,36 +47,33 @@ function Playlist(props:{contentList:Map<string,string>,setLink:any}){
                 reject(err);
               })
         });
-        return p;
+        return Promise.race([p,timeout]) as Promise<string>;
     }
     function formList(){
         var elementList:JSX.Element[] = [];
 
-        linksKeys.forEach((id,index)=>{
-            // if(index == active){
-                // elementList.push(<PlayListElement 
-                // label={contents.get(link)} 
-                // embedHost={embedLink} 
-                // id={contents.get(link)} 
-                // setLink={props.setLink} 
-                // setActive={setActive} 
-                // index={index} 
-                // active={true}></PlayListElement>);
-                elementList.push(<ListGroup.Item className='list-style' href={'#'+index} action onClick={event=>{
-                                props.setLink(embedLink+id); 
-                            }}>{contents.get(id)}</ListGroup.Item>);
-            // } else {
-                // elementList.push(<PlayListElement 
-                // label={contents.get(link)} 
-                // embedHost={embedLink}
-                // id={contents.get(link)} 
-                // setLink={props.setLink} 
-                // setActive={setActive} 
-                // index={index} 
-                // active={false}></PlayListElement>);
-            // }
+        linksKeys.forEach((link,index)=>{
+            if(index == active){
+                elementList.push(<PlayListElement 
+                label={contents.get(link)} 
+                embedHost={embedLink} 
+                id={contents.get(link)} 
+                setLink={props.setLink} 
+                setActive={setActive} 
+                index={index} 
+                active={true}></PlayListElement>);
+            } else {
+                elementList.push(<PlayListElement 
+                label={contents.get(link)} 
+                embedHost={embedLink}
+                id={contents.get(link)} 
+                setLink={props.setLink} 
+                setActive={setActive} 
+                index={index} 
+                active={false}></PlayListElement>);
+            }
         });
-        return elementList;
+        return elementList
     }
     function formTitles(){
         var promises:Promise<string>[] = [];
@@ -89,7 +91,7 @@ function Playlist(props:{contentList:Map<string,string>,setLink:any}){
     }
     return (<ListGroup variant='flush' className='border-0' >{formList()}</ListGroup>);
 }
-function VideoWidget(props:{throttle:any,contentList: Map<string, string>}){
+function VideoWidgetCore(props:{throttle:any,contentList: Map<string, string>}){
     const [heightString,setString] = useState('0px');
     const [activeLink,setLink] = useState(props.contentList.keys()[0]);
     const ref = useRef(null);
@@ -136,4 +138,4 @@ function VideoWidget(props:{throttle:any,contentList: Map<string, string>}){
         </div>
     );
 }
-export default React.memo(VideoWidget,VideoWidgetControl); 
+export default React.memo(VideoWidgetCore,VideoWidgetControl); 

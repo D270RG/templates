@@ -1,6 +1,6 @@
-import {useState,useEffect,MouseEventHandler} from 'react';
-import { Col,Row,Ratio,Container,Button} from 'react-bootstrap';
-import {ChevronDoubleLeft,ChevronDoubleRight,CircleFill,Circle} from 'react-bootstrap-icons';
+import {useState} from 'react';
+import {Row,Container} from 'react-bootstrap';
+import {ChevronDoubleLeft,ChevronDoubleRight,Circle} from 'react-bootstrap-icons';
 import './CarouselWidget.css';
 function sumMaps(a:Map<string,number>,b:Map<string,number>){
   a.forEach((value,key)=>{
@@ -55,7 +55,7 @@ function InteractiveButton(props){ //I don't want to declare types here
   if(props.doShrink === true){
     style.transform += props.shrinkString;
   }
-  return(<button style={style} className='m-0 h-100 p-0 m-0' onClick={()=>{move(index)}}>{props.child}</button>);
+  return(<button style={style} className='m-0 h-100 p-0 m-0 br-0' onClick={()=>{move(index)}}>{props.child}</button>);
 }
 
 function Carousel(props){
@@ -68,7 +68,8 @@ function Carousel(props){
 
   function formStyles(){
     var tileArr:JSX.Element[] = [];
-    props.contentArr.forEach((frame,index)=>{
+    props.contentArr.forEach((frame:string,index:number)=>{
+    
       var centricity = index-center;
       var distance = Math.abs(centricity)+1;
 
@@ -83,7 +84,7 @@ function Carousel(props){
       var initialShift = (props.contentArr.length*(props.width))/2+props.width/2;
       var initialShiftString = ' translateX(calc(50vw - '+initialShift+'px))';
 
-      tileArr.push(<InteractiveButton child={frame}
+      tileArr.push(<InteractiveButton child={<div className='w-100 h-100' style={{backgroundImage: frame}}></div>}
                   setCenter={setCenter} setTransition = {setTransition} index={index}
                   transitionString={transitionString} initialShiftString={initialShiftString} shrinkString={shrinkString} scaleString={scaleString}
                   opacityAmount={opacityAmount} distance={distance} width={props.width} transition={transition} center={center}

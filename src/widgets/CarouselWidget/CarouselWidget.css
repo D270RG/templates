@@ -7,3 +7,6 @@
     -webkit-transition: -webkit-transform 1s;
     transition: transform 1s;
 }
+.br-0{
+    border-radius: 0px !important;
+}

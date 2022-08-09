@@ -26,7 +26,7 @@ function SocialWidget(){
                 </ListGroup>
             </Col>
             <Col lg='4'>{/*space*/}</Col>
-            <Col lg='4' className='justify-content-end text-end align-items-end'>
+            <Col lg='4' className='justify-content-end text-end align-items-end px-4'>
                 <div>
                     <Widget
                         name="Cheerswipe"

@@ -17,4 +17,9 @@ var buttonsDescriptions = [
     
 ];
 var smallText='Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum luctus lacus, quis venenatis ex condimentum vitae. Morbi elementum ipsum diam, ut sodales elit interdum quis. Nulla nunc ipsum, pretium ac ultrices id, faucibus vitae urna. Vivamus tortor ex, mattis et porta et, interdum vel justo. Sed dictum consequat faucibus. Praesent et massa euismod, congue mi et, pulvinar mauris. Nulla consectetur ornare ante, sed pellentesque velit accumsan at. Dolorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum euismod maximus felis. Donec eget tellus eu erat eleifend fringilla ut in purus.'
-export default {headerText,footerText,buttonsDescriptions,smallText}
+var smallTextsWithTitles = new Map([
+    ['Title One','Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec interdum luctus lacus, quis venenatis ex condimentum vitae. '],
+    ['Title Two','Duis faucibus, augue ac sollicitudin tempor, erat nunc eleifend sapien, sed eleifend risus risus malesuada arcu. Integer tempor ex arcu. '],
+    ['Title Three','Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Quisque aliquet dignissim enim. ']
+]);
+export default {headerText,footerText,buttonsDescriptions,smallText,smallTextsWithTitles}
