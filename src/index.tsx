@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
-// import Page from './pages/grid-layout';
-import Page from './pages/carousel-example'
+import Page from './pages/video-example'
 import NavPanel from './widgets/nav-panel/NavPanel';
-
+import { BrowserRouter,Route,Routes } from "react-router-dom";
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <React.StrictMode>
-    <NavPanel text='light' bg='dark'/>
-    <Page />
-  </React.StrictMode>
+  <StrictMode>
+    <BrowserRouter>
+      <NavPanel text='light' bg='dark'/>
+      <Page />
+    </BrowserRouter>
+  </StrictMode>
 );

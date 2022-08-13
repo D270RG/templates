@@ -1,4 +1,4 @@
-import {Col,Row,Container,ListGroup} from 'react-bootstrap';
+import {Col,Row,Container} from 'react-bootstrap';
 import '../../node_modules/bootstrap/dist/css/bootstrap.css';
 import './bootstrapTweaks.css';
 import './texts'
@@ -37,12 +37,12 @@ function Tiles(props:{textMap:Map<string,string>,showcases:string[],defaultPictu
         if((index%2)==0){
             el.push(<Row className='d-lg-none bg-light text-center justify-content-center p-3' style={{fontSize:'120%'}}>{title}</Row>);
             el.push(
-                    <Row className='bg-light' style={{height:'400px'}}>
+                    <Row style={{height:'400px'}}>
 
-                        <Col xl='8' lg='8' md='12' sm='12' xs='12' className='h-100 '>
+                        <Col xl='8' lg='8' md='12' sm='12' xs='12' className='h-100 bg-light p-0 m-0'>
                             <div className='h-100 w-100 p-0 m-0 parallax-container' style={{backgroundImage: image,overflow:'hidden'}}></div>
                         </Col>
-                        <Col xl='4' lg='4' className='text-center justify-content-center p-3 d-lg bg-red text-white'>
+                        <Col xl='4' lg='4' className='text-center justify-content-center p-3 m-0 d-lg bg-red text-white '>
                             <div style={{fontSize:'150%'}}>{title}</div>
                             <div>{props.textMap.get(title)}</div>
                         </Col>
@@ -59,7 +59,7 @@ function Tiles(props:{textMap:Map<string,string>,showcases:string[],defaultPictu
                             <div style={{fontSize:'150%'}}>{title}</div>
                             <div>{props.textMap.get(title)}</div>
                         </Col>
-                        <Col xl='8' lg='8' md='12' sm='12' xs='12' className='h-100'>
+                        <Col xl='8' lg='8' md='12' sm='12' xs='12' className='h-100 p-0 m-0'>
                             <div className='h-100 w-100 p-0 m-0 parallax-container' style={{backgroundImage: image,overflow:'hidden'}}></div>
                         </Col>
                         
