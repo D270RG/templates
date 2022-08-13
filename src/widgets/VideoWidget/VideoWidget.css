@@ -1,14 +1,17 @@
-.list-group-item.active {
+.btn-style,.list-style{
+  border: none !important;
+  outline:none !important;
+  box-shadow: none !important;
+  border-radius: 0px !important;
+}
+.active>.list-style,.active>.btn-style {
     z-index: 2;
-    color: #fff;
     background-color: red !important;
-    border-color: red !important;
     color: white;
   }
-.list-group-item.focus {
+.focus>.list-style,.focus>.btn-style {
     z-index: 2;
     color: #fff;
     background-color: red !important;
-    border-color: red !important;
     color: white;
   }

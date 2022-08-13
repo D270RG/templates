@@ -10,22 +10,29 @@ import {
     Routes,
     Route,
     Link,
+    NavLink,
+    Navigate
   } from "react-router-dom";
 
 function VideoWidgetControl(prevState,nextState){
     return (prevState.indicator) && (nextState.indicator);
 }
-function Playlist(props:{contentList:Map<string,string>}){
+function Playlist(props:{contentList:Map<string,string>,parentLink:string}){
 
     function formList(){
         var linksKeys = Array.from(props.contentList.keys());
         var elementList:JSX.Element[] = [];
         linksKeys.forEach((link,index)=>{
-            elementList.push(
-                <Link to={link as string}>
-                    <ListGroup.Item className='list-style' action>{props.contentList.get(link)}</ListGroup.Item>
-                </Link>
-            );
+
+                elementList.push(
+                    <NavLink className={({ isActive }) =>
+                                            isActive ? 'active' : undefined
+                                        } 
+                             to={link}>
+                        <ListGroup.Item className='list-style' action>{props.contentList.get(link)}</ListGroup.Item>
+                    </NavLink>
+                );
+
         });
         return elementList
     }
@@ -51,19 +58,26 @@ function VideoWidgetCore(props:{throttle:any,contentList: Map<string, string>,pa
     },[]);
     function frames(){
         var frameArr:JSX.Element[] = [];
-        Array.from(props.contentList.keys()).forEach(link=>{
-            console.log(props.parentLink+'/'+link);
-            frameArr.push(
-                <Route path={link} element={     
-                    <iframe 
-                        src={'https://www.youtube.com/embed/'+link}
-                        frameBorder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        title="Embedded youtube"
-                    />
-                }/>
-            );
+        Array.from(props.contentList.keys()).forEach((link,index)=>{
+                if(index==0){
+                    frameArr.push(
+                        <Route
+                            path="/"
+                            element={<Navigate to={link} />}
+                        />
+                    );
+                }
+                frameArr.push(
+                    <Route path={link} element={     
+                        <iframe 
+                            src={'https://www.youtube.com/embed/'+link}
+                            frameBorder="0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                            title="Embedded youtube"
+                        />
+                    }/>
+                );
         });
         return frameArr
     }
@@ -71,7 +85,7 @@ function VideoWidgetCore(props:{throttle:any,contentList: Map<string, string>,pa
         <div>
             <Row className='shadow bg-white' >
                 <Col lg='3' md='12' className='px-0' style={ {overflowY:'scroll',height:heightString}}>
-                    <Playlist contentList={props.contentList}/>
+                    <Playlist contentList={props.contentList} parentLink={props.parentLink}/>
                 </Col>
                 <Col lg='6' md='12' className='px-0'>
                     <div className='ratio ratio-16x9' style={{width:'100%'}} ref={ref} >

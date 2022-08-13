@@ -5,7 +5,9 @@ import {
     BrowserRouter,
     Routes,
     Route,
-    Link
+    Link,
+    Navigate,
+    NavLink
   } from "react-router-dom";
 var contentList = new Map<string,Map<string,string>>([
     ['title1',new Map<string,string>([
@@ -54,23 +56,36 @@ function PlayerRender(){
         var buttonTitles =  Array.from(contentList.keys());
         buttonTitles.forEach((buttonTitle,index)=>{
             buttonsArr.push(
-                <Link to={buttonTitle}>
-                    <ListButton className='btn' title={buttonTitle}/>
-                </Link>
+                <NavLink to={buttonTitle} className={({ isActive }) =>
+                                                isActive ? 'active' : undefined
+                                            } >
+                    <ListButton className='btn btn-style' title={buttonTitle}/>
+                </NavLink>
             );
         });
         return buttonsArr;
     }
     function VideoWidgets(){
         var VideoWidgetArr: JSX.Element[] = [];
-        Array.from(contentList.keys()).forEach(playlistTitle=>{
-            VideoWidgetArr.push(<Route path={playlistTitle+'/*'} element={
-                                            <VideoWidgetCore 
-                                            contentList={contentList.get(playlistTitle) as Map<string,string>}
-                                            parentLink={playlistTitle}
-                                            throttle={TimerComponent}
-                                        />
-                                    }/>);
+        Array.from(contentList.keys()).forEach((playlistTitle,index)=>{
+            if(index==0){
+                VideoWidgetArr.push(
+                    <Route
+                        path="/"
+                        element={<Navigate to={playlistTitle+'/'}/>}
+                    />
+                );
+            }
+                VideoWidgetArr.push(
+                    <Route path={playlistTitle+'/*'} element={
+                        <VideoWidgetCore 
+                            contentList={contentList.get(playlistTitle) as Map<string,string>}
+                            parentLink={playlistTitle}
+                            throttle={TimerComponent}
+                        />
+                    }/>
+                );
+
         });
         return VideoWidgetArr;
     }
