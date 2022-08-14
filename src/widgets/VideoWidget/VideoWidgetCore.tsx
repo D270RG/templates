@@ -28,7 +28,8 @@ function Playlist(props:{contentList:Map<string,string>,parentLink:string}){
                     <NavLink className={({ isActive }) =>
                                             isActive ? 'active' : undefined
                                         } 
-                             to={link}>
+                             to={link}  
+                             style={{ textDecoration: 'none' }}>
                         <ListGroup.Item className='list-style' action>{props.contentList.get(link)}</ListGroup.Item>
                     </NavLink>
                 );
@@ -62,14 +63,15 @@ function VideoWidgetCore(props:{throttle:any,contentList: Map<string, string>,pa
                 if(index==0){
                     frameArr.push(
                         <Route
-                            path="/"
-                            element={<Navigate to={link} />}
+                            path="*"
+                            element={<Navigate to={link} replace/>}
                         />
                     );
                 }
                 frameArr.push(
                     <Route path={link} element={     
                         <iframe 
+                            key={link}
                             src={'https://www.youtube.com/embed/'+link}
                             frameBorder="0"
                             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

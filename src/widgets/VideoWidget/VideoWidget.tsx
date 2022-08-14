@@ -72,7 +72,7 @@ function PlayerRender(){
                 VideoWidgetArr.push(
                     <Route
                         path="/"
-                        element={<Navigate to={playlistTitle+'/'}/>}
+                        element={<Navigate to={playlistTitle+'/*'}/>}
                     />
                 );
             }
