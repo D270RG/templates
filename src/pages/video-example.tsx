@@ -11,6 +11,12 @@ function Page(){
     return(
         <Container fluid className='m-0 p-0 bg-gradient-blue' style={{overflowX:'hidden'}}>
             <PlayerRender/>
+            <Container fluid className='m-0 p-0 bg-white'>
+                <Row className='d-xs' style={{height:'calc(100vh*0.03)'}}>{/*space*/}</Row>
+                    <ColumnsWidget/>
+                <Row className='d-xs' style={{height:'calc(100vh*0.03)'}}>{/*space*/}</Row>
+                <SocialWidget/>
+            </Container>
         </Container>
     );  
 }

@@ -39,12 +39,9 @@ function Grid(){
                     <Col lg='1' className='d-lg'/*style={{border:'2px solid'}}*/>{/*space*/}</Col>
                 </Row>
 
-                
-
+                <Row className='d-lg' style={{height:'calc(100vh*0.03)'}}>{/*space*/}</Row>
                 <ButtonsWidget texts={Texts.buttonsDescriptions}/>
-
-
-                <Row className='d-xs' style={{height:'calc(100vh*0.03)'}}>{/*space*/}</Row>
+                <Row className='d-lg' style={{height:'calc(100vh*0.03)'}}>{/*space*/}</Row>
 
                 <Row className='bg-red shadow'>
                     <Col md='1' /*style={{border:'2px solid'}}*/>{/*space*/}</Col>

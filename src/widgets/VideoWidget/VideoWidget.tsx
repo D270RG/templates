@@ -9,6 +9,7 @@ import {
     Navigate,
     NavLink
   } from "react-router-dom";
+
 var contentList = new Map<string,Map<string,string>>([
     ['title1',new Map<string,string>([
         [`4auzwSFb5S4`,'No title'],
@@ -50,6 +51,7 @@ function TimerComponent(func){
         timer = setTimeout(func,100,event);
     };
 }
+
 function PlayerRender(){
     function formButtons(){
         var buttonsArr:JSX.Element[] = [];
@@ -71,8 +73,8 @@ function PlayerRender(){
             if(index==0){
                 VideoWidgetArr.push(
                     <Route
-                        path="/"
-                        element={<Navigate to={playlistTitle+'/*'}/>}
+                        path={"/"}
+                        element={<Navigate to={playlistTitle+'/'}/>}
                     />
                 );
             }
@@ -90,18 +92,18 @@ function PlayerRender(){
         return VideoWidgetArr;
     }
     return(
-            <Container fluid className='m-0 p-0'>
-                <Row className='d-xs' style={{height:'calc(100vh*0.03)'}}>{/*space*/}</Row>
-                        {formButtons()}
+        <Container fluid className='m-0 p-0'>
+            <Row className='d-xs' style={{height:'calc(100vh*0.03)'}}>{/*space*/}</Row>
+                    {formButtons()}
 
-                        <Row className='shadow bg-white' >
-                            <Container fluid className='bg-dark m-0 p-2'>Title</Container>
-                        </Row>
-                        <Routes>
-                            {VideoWidgets()}
-                        </Routes>
-                <Row className='d-xs' style={{height:'calc(100vh*0.03)'}}>{/*space*/}</Row>
-            </Container>
+                    <Row className='shadow bg-white' >
+                        <Container fluid className='bg-dark m-0 p-2'>Title</Container>
+                    </Row>
+                    <Routes>
+                        {VideoWidgets()}
+                    </Routes>
+            <Row className='d-xs' style={{height:'calc(100vh*0.03)'}}>{/*space*/}</Row>
+        </Container>
     );
 }
 

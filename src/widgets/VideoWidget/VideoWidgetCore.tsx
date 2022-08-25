@@ -30,7 +30,7 @@ function Playlist(props:{contentList:Map<string,string>,parentLink:string}){
                                         } 
                              to={link}  
                              style={{ textDecoration: 'none' }}>
-                        <ListGroup.Item className='list-style' action>{props.contentList.get(link)}</ListGroup.Item>
+                        <ListGroup.Item className='list-style bg-white' action>{props.contentList.get(link)}</ListGroup.Item>
                     </NavLink>
                 );
 
@@ -44,11 +44,15 @@ function VideoWidgetCore(props:{throttle:any,contentList: Map<string, string>,pa
     const ref = useRef(null);
 
     function resize(){
-       try{
-        setString(ref.current!['clientHeight'] + 'px');
-       } catch(e) {
-        setString(ref.current!['clientHeight'] + 'px');
-       } //supress errors
+       if(window.innerWidth>=992){
+            try{
+                setString(ref.current!['clientHeight'] + 'px');
+            } catch(e) {
+                setString(ref.current!['clientHeight'] + 'px');
+            } //supress errors
+       } else {
+            setString('100%');
+       }
     }
     useEffect(() => {
         resize();
