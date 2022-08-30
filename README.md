@@ -6,6 +6,8 @@ React-Bootstrap v5
 
 Layout: Flex/Bootstrap-grids
 
+Static preview: https://templates.onrender.com/
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
