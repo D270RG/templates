@@ -1,7 +1,7 @@
 Used stack: 
-JS,HTML5,CSS
-React+Router
-Typescript
+JS,HTML5,CSS,
+React+Router,
+Typescript,
 Bootstrap v5
 
 Layout: Flex/Bootstrap-grids
