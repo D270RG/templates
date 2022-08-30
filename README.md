@@ -1,3 +1,11 @@
+Used stack: 
+JS,HTML5,CSS
+React+Router
+Typescript
+Bootstrap v5
+
+Layout: Flex/Bootstrap-grids
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
