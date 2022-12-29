@@ -1,11 +1,3 @@
-Used stack: 
-JS,HTML5,CSS,
-React+Router,
-Typescript,
-React-Bootstrap v5
-
-Layout: Flex/Bootstrap-grids
-
 Static preview: https://templates.onrender.com/
 
 # Getting Started with Create React App
